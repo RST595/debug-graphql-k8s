@@ -1,0 +1,40 @@
+type Book {
+    id: ID!
+    title: String
+    pages: Int
+    rating: Rating
+    author: Author
+}
+
+type Rating {
+    rating: String
+    star: String
+}
+
+#enum Rating { // Another possible way for enums
+#    FIVE_STARS,
+#    FOUR_STARS,
+#    THREE_STARS,
+#    TWO_STARS,
+#    ONE_STAR
+#}
+
+type Author {
+    id: ID!
+    firstName: String
+    lastName: String
+    books: [Book]
+}
+
+type Query {
+    allBooks: [Book]!
+    findOne(id: ID!): Book
+    allAuthors: [Author]!
+    findOneAuthor(id: ID!): Author
+}
+
+type Mutation {
+    createAuthor(firstName: String!, lastName: String!): Author!
+    updateAuthor(id: ID!, firstName: String!, lastName: String!): Author!
+    deleteAuthor(id: ID!): Author!
+}

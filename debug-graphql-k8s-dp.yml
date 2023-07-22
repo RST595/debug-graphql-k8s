@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug-graphql-k8s
+spec:
+  selector:
+    matchLabels:
+      app: debug-graphql-k8s
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: debug-graphql-k8s
+    spec:
+      containers:
+        - name: debug-graphql-k8s
+          image: debug-graphql-k8s-app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: debug-port
+              containerPort: 5005
+              protocol: TCP
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: '-Xdebug -agentlib:jdwp=transport=dt_socket,address=0.0.0.0:5005,server=y,suspend=n'
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: debug-graphql-k8s-svc
+spec:
+  selector:
+    app: debug-graphql-k8s
+  ports:
+    - protocol: TCP
+      port: 8080
+      name: http
+      targetPort: 8080
+  type: NodePort

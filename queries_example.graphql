@@ -1,0 +1,61 @@
+# query {
+#   allBooks {
+#     id
+#     title
+#     pages
+#     rating {
+#       star
+#     }
+#     author {
+#       id
+#       firstName
+#       lastName
+#     }
+#   }
+# }
+#
+# query {
+#   findOne(id: 1) {
+#     id
+#     title
+#     pages
+#   }
+# }
+#
+# query {
+#   allAuthors{
+#     lastName
+#     firstName
+#   }
+# }
+#
+# query {
+#   findOneAuthor(id: 5){
+#     lastName
+#     firstName
+#   }
+# }
+#
+# mutation {
+#   createAuthor(firstName: "Robert", lastName:"Martin") {
+#     id
+#     firstName
+#     lastName
+#   }
+# }
+#
+# mutation {
+#   updateAuthor(id: 2, firstName: "Robert", lastName:"Martin") {
+#     id
+#     firstName
+#     lastName
+#   }
+# }
+#
+# mutation {
+#   deleteAuthor(id: 2) {
+#     id
+#     firstName
+#     lastName
+#   }
+# }
